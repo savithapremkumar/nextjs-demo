@@ -33,7 +33,7 @@ export async function getStaticPaths() {
     //fallback set to true or blocking means the path/page will be generated and cached
     // with true first an empty page is seen until the data is generated and populated, while
     // with blocking the user wont see the page until all data is pppulated
-    fallback: blocking,
+    fallback: "blocking",
     paths: meetups.map((meetup) => ({
       params: { meetupId: meetup._id.toString() },
     })),
