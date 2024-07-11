@@ -29,7 +29,11 @@ export async function getStaticPaths() {
   const meetups = await meetupsCollection.find({}, { _id: 1 }).toArray();
   client.close();
   return {
-    fallback: false,
+    //fallback set to false means 404 is shown for any paths not generated at buildtime,
+    //fallback set to true or blocking means the path/page will be generated and cached
+    // with true first an empty page is seen until the data is generated and populated, while
+    // with blocking the user wont see the page until all data is pppulated
+    fallback: blocking,
     paths: meetups.map((meetup) => ({
       params: { meetupId: meetup._id.toString() },
     })),
